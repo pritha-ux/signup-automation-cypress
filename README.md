@@ -13,7 +13,6 @@ npm install cypress --save-dev
 **How to Run**
 bash
 npx cypress open
-
 - Click on `spec.cy.js'
 - Test will run automatically in Chrome
 
@@ -36,4 +35,4 @@ npx cypress open
 **Notes**
 - Email is auto-generated each run via Guerrilla Mail API
 - OTP is automatically fetched from inbox
--The phone number is currently hardcoded in the script. Users must update the phone number before each execution to avoid duplicate registration errors.
+- The phone number is currently hardcoded in the script. Users must update the phone number before each execution to avoid duplicate registration errors.
