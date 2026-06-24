@@ -20,10 +20,11 @@ describe('Signup Flow Test', () => {
         cy.get('input[placeholder="Enter Your First Name"]').type('Apar')
         cy.get('input[placeholder="Enter Your Last Name"]').type('Gosain')
         cy.get('input[placeholder="Enter Your Email Address"]').type(tempEmail)
-        cy.get('input[placeholder="00-00000000"]').type('9710401800')
+        cy.get('input[placeholder="00-00000000"]').type('9712100451')
         cy.get('input[name="password"]').type('Apar@1234678')
         cy.get('input[name="confirmPassword"]').type('Apar@1234678')
         cy.contains('button', 'Next').click({ force: true })
+        cy.screenshot('registration-form')
 
         // Email OTP Verification
         cy.contains('Email Verification code', { timeout: 15000 }).should('be.visible')
@@ -53,6 +54,7 @@ describe('Signup Flow Test', () => {
                   .type(otp, { delay: 200 })
 
                 cy.contains('button', 'Verify Code').click()
+                cy.screenshot(' Otp-verification')
 
                 // Fill Agency Details
 
@@ -66,6 +68,7 @@ describe('Signup Flow Test', () => {
                 cy.get('button[role="combobox"]').click()
                 cy.contains('Nepal').click()
                 cy.contains('button', 'Next').click()
+                cy.screenshot('agency-details')
 
                 // Verify Experience and Performance Metrics Page
 
@@ -80,7 +83,7 @@ describe('Signup Flow Test', () => {
                 cy.get('input[placeholder*="E.g., 90"]').type('70')
                 cy.contains('Visa Processing').click()
                 cy.contains('button', 'Next').click()
-
+                cy.screenshot('experience-details')
                 // Verify Business Details and Preferences Page
 
                 cy.contains('Provide Business Details and Set Preferences', { timeout: 10000 }).should('be.visible')
@@ -94,13 +97,14 @@ describe('Signup Flow Test', () => {
 
                 // Upload Documents
 
-                cy.get('input[type="file"]').eq(0).selectFile('cypress/fixtures/test.pdf', { force: true })
-                cy.get('input[type="file"]').eq(1).selectFile('cypress/fixtures/test.pdf', { force: true })
+                cy.get('input[type="file"]').eq(0).selectFile('cypress/Report/test-report.pdf', { force: true })
                 cy.contains('button', 'Submit').click()
+                cy.screenshot('business-details')
 
                 // Verify that the user is redirected to the profile page after successful signup
-                
-                cy.url().should('include', '/admin/profile')
+                  cy.location('pathname', { timeout: 30000 })
+                    .should('include', '/admin/profile')
+                    cy.screenshot('profile-page')
               })
           })
       })
